@@ -21,46 +21,38 @@ public class InputManager : MonoBehaviour
     {
         if (stateManager.currentState != PlayerStateManager.PlayerState.Win && stateManager.currentState != PlayerStateManager.PlayerState.GameOver)
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (stateManager.currentState == PlayerStateManager.PlayerState.Cruising)
-                {
-                    stateManager.ChangeState(PlayerStateManager.PlayerState.Sailing);
-                }
-                else if (stateManager.currentState == PlayerStateManager.PlayerState.Sailing)
-                {
-                    stateManager.ChangeState(PlayerStateManager.PlayerState.Cannons);
-                }
-                else if (stateManager.currentState == PlayerStateManager.PlayerState.Cannons)
-                {
-                    stateManager.ChangeState(PlayerStateManager.PlayerState.Cruising);
-                }
-            }
-            switch (stateManager.currentState)
-            {
-                case PlayerStateManager.PlayerState.Menu:
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                stateManager.ChangeState(PlayerStateManager.PlayerState.Cruising);
 
-                    break;
-                case PlayerStateManager.PlayerState.Cruising:
-                    cannonsManager.UnselectCannons();
-                    CruisingControlls();
-                    break;
-                case PlayerStateManager.PlayerState.Sailing:
-                    SailControlls();
-                    break;
-                case PlayerStateManager.PlayerState.Cannons:
-                    CannonsControlls();
-                    break;
-                case PlayerStateManager.PlayerState.Paused:
-                    break;
-                case PlayerStateManager.PlayerState.GameOver:
-                    break;
-                case PlayerStateManager.PlayerState.Win:
-                    break;
-            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                stateManager.ChangeState(PlayerStateManager.PlayerState.Sailing);
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                stateManager.ChangeState(PlayerStateManager.PlayerState.Cannons);
+
         }
-        
+        switch (stateManager.currentState)
+        {
+            case PlayerStateManager.PlayerState.Menu:
 
+                break;
+            case PlayerStateManager.PlayerState.Cruising:
+                cannonsManager.UnselectCannons();
+                CruisingControlls();
+                break;
+            case PlayerStateManager.PlayerState.Sailing:
+                SailControlls();
+                break;
+            case PlayerStateManager.PlayerState.Cannons:
+                CannonsControlls();
+                break;
+            case PlayerStateManager.PlayerState.Paused:
+                break;
+            case PlayerStateManager.PlayerState.GameOver:
+                break;
+            case PlayerStateManager.PlayerState.Win:
+                break;
+        }
 
     }
 
@@ -84,7 +76,7 @@ public class InputManager : MonoBehaviour
     }
     private void SailControlls()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             sailController.IncreaseSailSpeed();
             sailController.UpdateSailText();

@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private TextMeshProUGUI goldText;
 
+    [SerializeField] private UnityEngine.UI.Image hotBarCruising;
+    [SerializeField] private UnityEngine.UI.Image hotBarSails;
+    [SerializeField] private UnityEngine.UI.Image hotBarCannon;
 
 
     // Start is called before the first frame update
@@ -32,28 +35,34 @@ public class UIManager : MonoBehaviour
         if (playerStateManager.currentState == PlayerStateManager.PlayerState.Cannons)
         {
             CannonInstructionText.gameObject.SetActive(true);
+            hotBarCannon.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1);
         }
         else
         {
             CannonInstructionText.gameObject.SetActive(false);
+            hotBarCannon.rectTransform.localScale = new Vector3(1f, 1f, 1);
         }
 
         if (playerStateManager.currentState == PlayerStateManager.PlayerState.Sailing)
         {
             SailsInstructionText.gameObject.SetActive(true);
+            hotBarSails.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1);
         }
         else
         {
             SailsInstructionText.gameObject.SetActive(false);
+            hotBarSails.rectTransform.localScale = new Vector3(1f, 1f, 1);
         }
         
         if (playerStateManager.currentState == PlayerStateManager.PlayerState.Cruising)
         {
             CruisingInstructionText.gameObject.SetActive(true);
+            hotBarCruising.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1);
         }
         else
         {
             CruisingInstructionText.gameObject.SetActive(false);
+            hotBarCruising.rectTransform.localScale = new Vector3(1f, 1f, 1);
         }
     }
 
