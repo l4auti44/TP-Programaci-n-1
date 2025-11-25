@@ -8,18 +8,16 @@ using UnityEngine.UI;
 public class SailController : MonoBehaviour
 {
 
-
-    [SerializeField] private float maxSailAngle = 45f;
     [SerializeField] private float speedRotation = 50f;
     [SerializeField] private Transform sailPosition;
     private TextMeshProUGUI sailText;
-    private PlayerStateManager stateManager;
+
 
     public int currentSpeedLevel = 1;
 
     void Start()
     {
-        stateManager = sailPosition.parent.GetComponent<PlayerStateManager>();
+
         if (transform.parent.CompareTag("Player"))
         {
             sailText = GameObject.Find("SailSpeedText").GetComponent<TextMeshProUGUI>();

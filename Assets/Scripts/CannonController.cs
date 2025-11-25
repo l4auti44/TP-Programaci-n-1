@@ -10,6 +10,7 @@ public class CannonController : MonoBehaviour
     [SerializeField] private GameObject cannonballPrefab;
     public Transform firePoint;
     private PlayerStateManager stateManager;
+    private GameObject smokeEffect;
 
     [SerializeField] public bool isBought = false;
 
@@ -27,6 +28,11 @@ public class CannonController : MonoBehaviour
     void Start()
     {
         stateManager = GetComponentInParent<PlayerStateManager>();
+        
+        smokeEffect = transform.Find("Smoke").gameObject;
+        smokeEffect.SetActive(false);
+        
+           
     }
 
 
@@ -38,6 +44,10 @@ public class CannonController : MonoBehaviour
         cannonBall.Init(firePoint.up, transform.parent.parent.GetComponent<Rigidbody2D>().velocity);
         Debug.Log("Cannon Fired!");
         SoundManager.PlaySound(SoundManager.Sound.Shoot);
+        
+        smokeEffect.SetActive(true);
+        StartCoroutine(DisableSmokeEffect());
+        
         StartCoroutine(CooldownCoroutine());
     }
 
@@ -69,6 +79,13 @@ public class CannonController : MonoBehaviour
         isEnabled = false;
         GetComponent<SpriteRenderer>().color = Color.gray;
         StopAllCoroutines();
+        smokeEffect.SetActive(false);
         state = CannonState.Ready;
+    }
+
+    private IEnumerator DisableSmokeEffect()
+    {
+        yield return new WaitForSeconds(0.7f);
+        smokeEffect.SetActive(false);
     }
 }

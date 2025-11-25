@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
         {
             sailController.IncreaseSailSpeed();
             sailController.UpdateSailText();
-            Camera.main.GetComponent<CameraController>().ChangeSizeOverTime(sailController.currentSpeedLevel * 10);
+            Camera.main.GetComponent<CameraController>().ChangeSizeOverTime(sailController.currentSpeedLevel * 5 + 10);
         }
     }
 }
