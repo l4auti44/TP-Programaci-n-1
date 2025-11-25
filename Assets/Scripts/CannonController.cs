@@ -37,6 +37,7 @@ public class CannonController : MonoBehaviour
         var cannonBall = Instantiate(cannonballPrefab, firePoint.position, firePoint.rotation).GetComponent<CannonBall>();
         cannonBall.Init(firePoint.up, transform.parent.parent.GetComponent<Rigidbody2D>().velocity);
         Debug.Log("Cannon Fired!");
+        SoundManager.PlaySound(SoundManager.Sound.Shoot);
         StartCoroutine(CooldownCoroutine());
     }
 

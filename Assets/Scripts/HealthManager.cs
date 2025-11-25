@@ -11,18 +11,24 @@ public class HealthManager : MonoBehaviour
     public float Health { get { return health; } }
     
     private PlayerStateManager _stateManager;
+    private UIManager _uiManager;
 
     void Start()
     {
         if (transform.parent.CompareTag("Player"))
         {
             _stateManager = GetComponent<PlayerStateManager>();
+            _uiManager = FindObjectOfType<UIManager>();
         }
     }
     public void TakeDamage(float damage)
     {
         health -= damage;
         Debug.Log(transform.parent.name + " took " + damage + " damage. Remaining health: " + health);
+        if (transform.parent.CompareTag("Player"))
+        {
+            _uiManager.UpdateHealthText((int)health, 100);
+        }
         if (health <= 0)
         {
             health = 0;
@@ -37,6 +43,7 @@ public class HealthManager : MonoBehaviour
         {
             Debug.Log("Game Over!");
             _stateManager.ChangeState(PlayerStateManager.PlayerState.GameOver);
+            FindObjectOfType<GameController>().OnDead();
         }
         else
         {

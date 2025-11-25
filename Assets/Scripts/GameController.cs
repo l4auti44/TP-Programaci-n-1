@@ -8,13 +8,15 @@ public class GameController : MonoBehaviour
     [SerializeField] private PlayerStateManager PlayerStateManager;
     private UIManager uiManager;
 
-    public int enemiesToDefeat = 2;
+    public int enemiesToDefeat = 4;
 
     public int gold = 0;
 
 
     void Start()
     {
+        SoundManager.PlayBackgroundMusic(SoundManager.Sound.Music);
+        SoundManager.PlayBackgroundMusic(SoundManager.Sound.Wind);
         uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -26,17 +28,20 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("All enemies defeated! You win!");
             PlayerStateManager.ChangeState(PlayerStateManager.PlayerState.Win);
+            uiManager.ShowQuitButton();
+            OnGamePaused();
         }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && PlayerStateManager.currentState != PlayerStateManager.PlayerState.Win 
+        && PlayerStateManager.currentState != PlayerStateManager.PlayerState.GameOver)
         {
             if(Time.timeScale == 0f)
                 EventManager.Game.OnGameResumed?.Invoke();
             else
-            EventManager.Game.OnGamePaused?.Invoke();
+                EventManager.Game.OnGamePaused?.Invoke();
         }
     }
 
@@ -63,6 +68,11 @@ public class GameController : MonoBehaviour
         uiManager.UpdateGoldText(gold);
     }
 
+    public void OnDead()
+    {
+        uiManager.ShowQuitButton();
+        OnGamePaused();
+    }
     void OnEnable()
     {
         EventManager.Game.OnGamePaused += OnGamePaused;

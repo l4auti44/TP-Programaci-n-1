@@ -41,6 +41,7 @@ public class InputManager : MonoBehaviour
                 CruisingControlls();
                 break;
             case PlayerStateManager.PlayerState.Sailing:
+                cannonsManager.UnselectCannons();
                 SailControlls();
                 break;
             case PlayerStateManager.PlayerState.Cannons:
