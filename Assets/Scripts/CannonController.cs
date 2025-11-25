@@ -11,6 +11,8 @@ public class CannonController : MonoBehaviour
     public Transform firePoint;
     private PlayerStateManager stateManager;
 
+    [SerializeField] public bool isBought = false;
+
     [HideInInspector] public bool isEnabled = false;
 
     private enum CannonState
@@ -31,9 +33,9 @@ public class CannonController : MonoBehaviour
 
     public void FireCannon()
     {
-        if (state != CannonState.Ready) return;
+          if (state != CannonState.Ready) return;
         var cannonBall = Instantiate(cannonballPrefab, firePoint.position, firePoint.rotation).GetComponent<CannonBall>();
-        cannonBall.Init(firePoint.up, transform.parent.GetComponent<Rigidbody2D>().velocity);
+        cannonBall.Init(firePoint.up, transform.parent.parent.GetComponent<Rigidbody2D>().velocity);
         Debug.Log("Cannon Fired!");
         StartCoroutine(CooldownCoroutine());
     }
@@ -52,5 +54,20 @@ public class CannonController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawLine(firePoint.position, firePoint.position + firePoint.up * 2f);
         }
+    }
+
+    public void SetCannonActive()
+    {
+        if (!isBought) return;
+        isEnabled = true;
+        GetComponent<SpriteRenderer>().color = Color.green;
+    }
+
+    public void SetCannonInactive()
+    {
+        isEnabled = false;
+        GetComponent<SpriteRenderer>().color = Color.gray;
+        StopAllCoroutines();
+        state = CannonState.Ready;
     }
 }

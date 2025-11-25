@@ -66,7 +66,7 @@ public class InputManager : MonoBehaviour
 
     private void CannonsControlls()
     {
-        if (cannonsManager.cannonEnabled == null) cannonsManager.SelectCannon();
+        if (cannonsManager.cannonGroupEnabled == null) cannonsManager.SelectCannon();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             cannonsManager.SwitchCannon();
@@ -74,8 +74,8 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (cannonsManager.cannonEnabled.isEnabled)
-                cannonsManager.cannonEnabled.FireCannon();
+            if (cannonsManager.cannonGroupEnabled.isCannonsActive)
+                cannonsManager.cannonGroupEnabled.FireCannons();
         }
     }
     private void CruisingControlls()

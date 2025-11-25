@@ -13,7 +13,7 @@ public static class EventManager
     public class GameEvents
     {
         public UnityAction OnWin;
-        public UnityAction OnTreasurePicked;
+        public UnityAction<int> OnTreasurePicked;
         public UnityAction OnGamePaused;
         public UnityAction OnGameResumed;
 

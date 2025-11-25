@@ -4,80 +4,72 @@ using UnityEngine;
 
 public class CannonsManager : MonoBehaviour
 {
-    [SerializeField] private CannonController[] cannons;
-    [HideInInspector] public CannonController cannonEnabled;
+    [SerializeField] private CannonGroup[] cannonsGroup;
+    [HideInInspector] public CannonGroup cannonGroupEnabled;
     private PlayerStateManager stateManager;
-    // Start is called before the first frame update
+    
+
     void Start()
     {
         stateManager = GetComponent<PlayerStateManager>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void UnselectCannons()
     {
-
-
-        
+        foreach (var cannonGroup in cannonsGroup)
+        {
+            cannonGroup.SetCannonsInactive();
+            cannonGroup.isCannonsActive = false;
+        }
+        cannonGroupEnabled = null;
     }
-
 
     public void SwitchCannon()
     {
-        CannonController previousCannon = null;
-        if (cannonEnabled != null)
+        if (cannonGroupEnabled == null)
         {
-            cannonEnabled.GetComponent<SpriteRenderer>().color = Color.gray;
-            previousCannon = cannonEnabled;
+            SelectCannon();
+            return;
         }
-
-
-        
-
-        foreach (var cannon in cannons)
-        {
-            if (!cannon.isEnabled && cannon != previousCannon && previousCannon != null)
+        foreach (var cannonGroup in cannonsGroup)
             {
-                cannon.isEnabled = true;
-                cannonEnabled.isEnabled = false;
-                cannon.GetComponent<SpriteRenderer>().color = Color.green;
-                cannonEnabled = cannon;
-                break;
+                if (cannonGroup.isCannonsActive)
+                {
+                    cannonGroup.SetCannonsInactive();
+                    cannonGroup.isCannonsActive = false;
+                }
+                else
+                {
+                    cannonGroup.SetCannonsActive();
+                    cannonGroup.isCannonsActive = true;
+                    cannonGroupEnabled = cannonGroup;
+                }
             }
-        }
-    }
-
-    public void UnselectCannons()
-    {
-        if (cannonEnabled != null)
-        {
-            cannonEnabled.GetComponent<SpriteRenderer>().color = Color.gray;
-            cannonEnabled.isEnabled = false;
-            cannonEnabled = null;
-        }
     }
 
     public void SelectCannon()
     {
-            cannonEnabled = cannons[0];
-            cannonEnabled.GetComponent<SpriteRenderer>().color = Color.green;
-            cannonEnabled.isEnabled = true;
-            
+        cannonGroupEnabled = cannonsGroup[0];
+        cannonsGroup[0].SetCannonsActive();
+        cannonsGroup[0].isCannonsActive = true;
+        
     }
 
     public void ShootIACannon(Transform target)
     {
-        float Cannon1DistanceToPlayer = Vector2.Distance(cannons[0].transform.position, target.transform.position);
-        float Cannon2DistanceToPlayer = Vector2.Distance(cannons[1].transform.position, target.transform.position);
+        
+        CannonGroup cannonEnabled;
+        float Cannon1DistanceToPlayer = Vector2.Distance(cannonsGroup[0].GetAICannon().transform.position, target.transform.position);
+        float Cannon2DistanceToPlayer = Vector2.Distance(cannonsGroup[1].GetAICannon().transform.position, target.transform.position);
         if (Cannon1DistanceToPlayer < Cannon2DistanceToPlayer)
         {
-            cannonEnabled = cannons[0];
+            cannonEnabled = cannonsGroup[0];
         }
         else
         {
-            cannonEnabled = cannons[1];
+            cannonEnabled = cannonsGroup[1];
         }
-        cannonEnabled.isEnabled = true;
-        cannonEnabled.FireCannon();
+        cannonEnabled.ActivateCannonsAI();
+        
     }
+    
 }

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
 
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private TextMeshProUGUI goldText;
 
 
 
@@ -83,14 +84,22 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void UpdateGoldText(int goldAmount)
+    {
+        goldText.text = goldAmount.ToString();
+    }
+
+
         void OnEnable()
     {
         EventManager.Game.OnGamePaused += ShowPauseMenu;
         EventManager.Game.OnGameResumed += HidePauseMenu;
+
     }
     void OnDisable()
     {
-        EventManager.Game.OnTreasurePicked -= ShowPauseMenu;
+        EventManager.Game.OnGamePaused -= ShowPauseMenu;
         EventManager.Game.OnGameResumed -= HidePauseMenu;
+
     }
 }
