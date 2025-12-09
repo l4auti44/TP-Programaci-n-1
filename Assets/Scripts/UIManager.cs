@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
 
     [SerializeField] private UnityEngine.UI.Image hotBarCruising;
-    [SerializeField] private UnityEngine.UI.Image hotBarSails;
     [SerializeField] private UnityEngine.UI.Image hotBarCannon;
 
     [SerializeField] private Button quitButton;
@@ -49,28 +48,17 @@ public class UIManager : MonoBehaviour
             if (hotBarCannon != null)
             hotBarCannon.rectTransform.localScale = new Vector3(1f, 1f, 1);
         }
-
-        if (playerStateManager.currentState == PlayerStateManager.PlayerState.Sailing)
-        {
-            SailsInstructionText.gameObject.SetActive(true);
-            if (hotBarSails != null)
-            hotBarSails.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1);
-        }
-        else
-        {
-            SailsInstructionText.gameObject.SetActive(false);
-            if (hotBarSails != null)
-            hotBarSails.rectTransform.localScale = new Vector3(1f, 1f, 1);
-        }
         
         if (playerStateManager.currentState == PlayerStateManager.PlayerState.Cruising)
         {
+            SailsInstructionText.gameObject.SetActive(true);
             CruisingInstructionText.gameObject.SetActive(true);
             if (hotBarCruising != null)
             hotBarCruising.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1);
         }
         else
         {
+            SailsInstructionText.gameObject.SetActive(false);
             CruisingInstructionText.gameObject.SetActive(false);
             if (hotBarCruising != null)
             hotBarCruising.rectTransform.localScale = new Vector3(1f, 1f, 1);

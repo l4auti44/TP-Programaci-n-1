@@ -12,7 +12,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         Menu,
         Cruising,
-        Sailing,
         Cannons,
         Paused,
         GameOver,

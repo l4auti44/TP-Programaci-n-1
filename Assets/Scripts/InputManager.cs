@@ -25,9 +25,6 @@ public class InputManager : MonoBehaviour
                 stateManager.ChangeState(PlayerStateManager.PlayerState.Cruising);
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
-                stateManager.ChangeState(PlayerStateManager.PlayerState.Sailing);
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
                 stateManager.ChangeState(PlayerStateManager.PlayerState.Cannons);
 
         }
@@ -39,9 +36,6 @@ public class InputManager : MonoBehaviour
             case PlayerStateManager.PlayerState.Cruising:
                 cannonsManager.UnselectCannons();
                 CruisingControlls();
-                break;
-            case PlayerStateManager.PlayerState.Sailing:
-                cannonsManager.UnselectCannons();
                 SailControlls();
                 break;
             case PlayerStateManager.PlayerState.Cannons:
