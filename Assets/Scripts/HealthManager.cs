@@ -61,4 +61,18 @@ public class HealthManager : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+
+    void OnEnable()
+    {
+        if (transform.parent.CompareTag("Player"))
+            EventManager.Game.OnPlayerDead += OnDead;
+
+    }
+    void OnDisable()
+    {
+        if (transform.parent.CompareTag("Player"))
+            EventManager.Game.OnPlayerDead -= OnDead;
+
+    }
 }

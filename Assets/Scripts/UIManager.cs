@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button mainMenuButton;
 
+    [SerializeField] private TextMeshProUGUI fogText;
+    [SerializeField] private TextMeshProUGUI fogTimerText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,8 @@ public class UIManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         quitButton.gameObject.SetActive(false);
         mainMenuButton.gameObject.SetActive(false);
+        fogText.gameObject.SetActive(false);
+        fogTimerText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -111,16 +117,18 @@ public class UIManager : MonoBehaviour
     }
 
 
-        void OnEnable()
+    void OnEnable()
     {
         EventManager.Game.OnGamePaused += ShowPauseMenu;
         EventManager.Game.OnGameResumed += HidePauseMenu;
+        EventManager.Game.OnFogEnter += ToggleFogText;
 
     }
     void OnDisable()
     {
         EventManager.Game.OnGamePaused -= ShowPauseMenu;
         EventManager.Game.OnGameResumed -= HidePauseMenu;
+        EventManager.Game.OnFogEnter -= ToggleFogText;
 
     }
 
@@ -128,5 +136,33 @@ public class UIManager : MonoBehaviour
     {
         if(HealthText == null) return;
         HealthText.text = "Health: " + currentHealth.ToString() + " / " + maxHealth.ToString();
+    }
+
+    private void ToggleFogText(bool inFog)
+    {
+        if (inFog)
+        {
+            fogText.gameObject.SetActive(true);
+            fogTimerText.gameObject.SetActive(true);
+            StartCoroutine(FogTimerCoroutine(5f));
+        }
+        else
+        {
+            fogText.gameObject.SetActive(false);
+            fogTimerText.gameObject.SetActive(false);
+            StopAllCoroutines();
+        }
+    }
+
+    IEnumerator FogTimerCoroutine(float duration)
+    {
+        float remainingTime = duration;
+        while (remainingTime >= 0f)
+        {
+            fogTimerText.text = remainingTime.ToString();
+            yield return new WaitForSeconds(0.9f);
+            remainingTime -= 1f;
+        }
+        fogTimerText.text = "";
     }
 }

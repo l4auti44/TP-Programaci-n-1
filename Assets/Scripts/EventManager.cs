@@ -17,6 +17,11 @@ public static class EventManager
         public UnityAction OnGamePaused;
         public UnityAction OnGameResumed;
 
+        public UnityAction<bool> OnFogEnter;
+
+        public UnityAction OnPlayerDead;
+
+        
 
         
     }
