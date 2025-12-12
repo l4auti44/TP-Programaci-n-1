@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
         SoundManager.PlayBackgroundMusic(SoundManager.Sound.Music);
         SoundManager.PlayBackgroundMusic(SoundManager.Sound.Wind);
         uiManager = FindObjectOfType<UIManager>();
+        uiManager.UpdateGoldText(gold);
+        uiManager.UpdateEnemiesLeftText(enemiesToDefeat);
     }
 
     public void EnemyDefeated()

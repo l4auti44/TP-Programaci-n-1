@@ -7,7 +7,10 @@ public class EnemyController : MonoBehaviour
 {
     private Transform AimingPoint;
     [SerializeField] private SailController sailController;
+    [SerializeField] private SpriteRenderer sailImage;
+    [SerializeField] private GameObject overlayBoat;
 
+    
     private CannonsManager cannonsManager;
 
 
@@ -15,6 +18,7 @@ public class EnemyController : MonoBehaviour
     {
         AimingPoint = GameObject.Find("AIAimingPoint").transform;
         cannonsManager = GetComponent<CannonsManager>();
+
     }
     // Update is called once per frame
     void Update()
@@ -53,5 +57,19 @@ public class EnemyController : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawLine(origin, AimingPoint.position);
         }
+    }
+
+    public void OnFog()
+    {
+        sailImage.enabled = false;
+        overlayBoat.SetActive(true);
+        
+    }
+
+    public void OffFog()
+    {
+        sailImage.enabled = true;
+        overlayBoat.SetActive(false);
+
     }
 }

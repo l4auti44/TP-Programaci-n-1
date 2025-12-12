@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BuyCannon : MonoBehaviour
 {
-    [SerializeField] private CannonController cannon;
+    [SerializeField] public CannonController cannon;
     private GameController gameController;
     private Button buyButton;
     // Start is called before the first frame update

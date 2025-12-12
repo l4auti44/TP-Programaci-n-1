@@ -14,6 +14,11 @@ public class OnFogEnter : MonoBehaviour
             isInFog = true;
             EventManager.Game.OnFogEnter?.Invoke(true);
         }
+        if(other.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyController>().OnFog();
+            Debug.Log("Enemy entered fog area");
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -23,6 +28,11 @@ public class OnFogEnter : MonoBehaviour
             Debug.Log("Exited fog area");
             isInFog = false;
             EventManager.Game.OnFogEnter?.Invoke(false);
+        }
+        if(other.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyController>().OffFog();
+            Debug.Log("Enemy exited fog area");
         }
     }
 

@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
-    public UnityEngine.Vector2 direction;
-    [SerializeField] private float speed = 5f;
+    [HideInInspector] public UnityEngine.Vector2 direction;
+    [SerializeField] public float speed = 5f;
     public float damage = 20f;
     [SerializeField] private float lifeTime = 3f;
 
     private UnityEngine.Vector2 _momentum;
+
+    // Expose momentum so other scripts (fragments) can reuse the same ship velocity
+    public UnityEngine.Vector2 Momentum => _momentum;
 
     public void Init(UnityEngine.Vector2 direction, UnityEngine.Vector2 shipVelocity)
     {

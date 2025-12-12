@@ -7,7 +7,7 @@ public class CannonController : MonoBehaviour
 {
 
     [SerializeField] private float fireCooldown = 1f;
-    [SerializeField] private GameObject cannonballPrefab;
+    [SerializeField] public GameObject cannonballPrefab;
     public Transform firePoint;
     private PlayerStateManager stateManager;
     private GameObject smokeEffect;
