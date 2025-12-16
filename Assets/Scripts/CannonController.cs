@@ -9,12 +9,13 @@ public class CannonController : MonoBehaviour
     [SerializeField] private float fireCooldown = 1f;
     [SerializeField] public GameObject cannonballPrefab;
     public Transform firePoint;
-    private PlayerStateManager stateManager;
     private GameObject smokeEffect;
 
     [SerializeField] public bool isBought = false;
 
     [HideInInspector] public bool isEnabled = false;
+
+    private ShakeCamera shakeCamera;
 
     private enum CannonState
     {
@@ -27,12 +28,9 @@ public class CannonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stateManager = GetComponentInParent<PlayerStateManager>();
-        
         smokeEffect = transform.Find("Smoke").gameObject;
         smokeEffect.SetActive(false);
-        
-           
+        shakeCamera = transform.parent.parent.parent.GetComponentInChildren<ShakeCamera>();
     }
 
 
@@ -42,7 +40,11 @@ public class CannonController : MonoBehaviour
           if (state != CannonState.Ready) return;
         var cannonBall = Instantiate(cannonballPrefab, firePoint.position, firePoint.rotation).GetComponent<CannonBall>();
         cannonBall.Init(firePoint.up, transform.parent.parent.GetComponent<Rigidbody2D>().velocity);
-        Debug.Log("Cannon Fired!");
+        if (shakeCamera != null)
+        {
+            shakeCamera.duration = 0.1f;
+            shakeCamera.Shake();
+        }
         SoundManager.PlaySound(SoundManager.Sound.Shoot);
         
         smokeEffect.SetActive(true);

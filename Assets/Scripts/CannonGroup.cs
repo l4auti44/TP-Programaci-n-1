@@ -6,11 +6,13 @@ public class CannonGroup : MonoBehaviour
 {   [SerializeField] private CannonController[] cannons;
     private GameObject aimMarker;
     public bool isCannonsActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
         if (transform.parent.CompareTag("Player"))
         {
+
             aimMarker = transform.Find("Aim").gameObject;
             aimMarker.SetActive(false);
         }
@@ -48,7 +50,9 @@ public class CannonGroup : MonoBehaviour
         foreach (var cannon in cannons)
         {
             if (cannon.isBought == false) continue;
+            if (cannon.isEnabled == true)
             cannon.FireCannon();
+            
         }
     }
 

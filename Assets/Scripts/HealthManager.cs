@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,8 @@ public class HealthManager : MonoBehaviour
     private UIManager _uiManager;
 
     private HealthBar healthBar;
+    
+    private ShakeCamera shakeCamera;
 
     void Awake()
     {
@@ -29,6 +32,7 @@ public class HealthManager : MonoBehaviour
         {
             _stateManager = GetComponent<PlayerStateManager>();
             _uiManager = FindObjectOfType<UIManager>();
+            shakeCamera = transform.parent.GetComponentInChildren<ShakeCamera>();
         }
         if (transform.parent.CompareTag("Enemy"))
         {
@@ -41,6 +45,8 @@ public class HealthManager : MonoBehaviour
         Debug.Log(transform.parent.name + " took " + damage + " damage. Remaining health: " + health);
         if (transform.parent.CompareTag("Player"))
         {
+            shakeCamera.duration = 0.3f;
+            shakeCamera.Shake();
             _uiManager.UpdateHealthText((int)health, 100);
         }
         if (health <= 0)
@@ -51,6 +57,8 @@ public class HealthManager : MonoBehaviour
         if (transform.parent.CompareTag("Enemy"))
         {
             transform.parent.GetComponentInChildren<HealthBar>().UpdateHealthBar();
+            if (health > 0)
+                GetComponentInChildren<SimpleFlash>().Flash();
         }
     }
 

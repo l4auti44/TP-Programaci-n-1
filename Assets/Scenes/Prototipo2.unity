@@ -2773,6 +2773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 596736140}
   - component: {fileID: 596736141}
+  - component: {fileID: 596736142}
   m_Layer: 0
   m_Name: CameraPosition
   m_TagString: Untagged
@@ -2814,6 +2815,52 @@ MonoBehaviour:
   offset: 10
   followTarget: {fileID: 1508802453}
   sailController: {fileID: 1708793921}
+--- !u!114 &596736142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596736139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c2c244cd234154a9dea8e6018eaad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  shakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.044700623
+      value: -0.035369873
+      inSlope: 1.2049129
+      outSlope: 1.2049129
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.14943434
+      value: 0.19854586
+      inSlope: -0.58471763
+      outSlope: -0.58471763
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1116957
+      outWeight: 0.047178224
+    - serializedVersion: 3
+      time: 0.993103
+      value: -0.05978775
+      inSlope: -0.30620268
+      outSlope: -0.30620268
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &618324228
 GameObject:
   m_ObjectHideFlags: 0
