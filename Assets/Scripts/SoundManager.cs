@@ -17,8 +17,11 @@ public static class SoundManager
         Music,
         Dead,
         Shoot,
-        Wind
-    }
+        Wind,
+        PickUp,
+        Selection,
+        Buy
+        }
 
     private static GameObject OneShotGameObject, musicGameObject;
     private static AudioSource oneShotAudioSource, musicAudioSource;

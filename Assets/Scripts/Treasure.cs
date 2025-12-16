@@ -11,6 +11,7 @@ public class Treasure : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             EventManager.Game.OnTreasurePicked?.Invoke(goldAmount);
+            SoundManager.PlaySound(SoundManager.Sound.PickUp);
             //EventManager.Game.OnGamePaused?.Invoke();
             //StateManager.Instance.ChangeState(StateManager.GameState.Paused);
             //FindObjectOfType<GameController>().CollectTreasure();

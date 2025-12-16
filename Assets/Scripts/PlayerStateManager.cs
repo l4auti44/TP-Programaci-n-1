@@ -18,7 +18,6 @@ public class PlayerStateManager : MonoBehaviour
         Win
     }
 
-    [SerializeField] private TextMeshProUGUI stateText;
 
     [SerializeField] private UIManager uiManager;
     public PlayerState currentState;
@@ -32,7 +31,6 @@ public class PlayerStateManager : MonoBehaviour
     public void ChangeState(PlayerState newState)
     {
         currentState = newState;
-        stateText.text = "State: " + newState.ToString();
         checkWinOrLose();
         if (currentState == PlayerState.Paused)
         {

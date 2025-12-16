@@ -39,6 +39,7 @@ public class BuyCannon : MonoBehaviour
     {
         if (gameController.gold >= 100)
         {
+            SoundManager.PlaySound(SoundManager.Sound.Buy);
             gameController.DecreaseGold(100);
             cannon.isBought = true;
             buyButton.interactable = false;

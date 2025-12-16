@@ -21,6 +21,8 @@ public static class EventManager
 
         public UnityAction OnPlayerDead;
 
+        public UnityAction<string> SceneLoaded;
+
         
 
         

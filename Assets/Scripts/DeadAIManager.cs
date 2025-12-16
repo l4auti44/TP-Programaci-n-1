@@ -6,6 +6,7 @@ public class DeadAIManager : MonoBehaviour
 {
     [SerializeField] private Sprite deadSprite;
     [SerializeField] public GameObject treasurePrefab;
+    [SerializeField] private HealthBar healthBar;
     // Start is called before the first frame update
     public void OnDeadAI()
     {
@@ -17,7 +18,9 @@ public class DeadAIManager : MonoBehaviour
         transform.parent.Find("Sail").gameObject.SetActive(false);
         transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = deadSprite;
+        healthBar.HideHealthBar();
         Instantiate(treasurePrefab, transform.position, Quaternion.identity);
+        SoundManager.PlaySound(SoundManager.Sound.Dead);
         Destroy(gameObject, 3f);
 
     }

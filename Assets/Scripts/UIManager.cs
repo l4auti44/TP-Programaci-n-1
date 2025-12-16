@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Button quitButton;
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button restartButton;
 
     [SerializeField] private TextMeshProUGUI fogText;
     [SerializeField] private TextMeshProUGUI fogTimerText;
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         GameStateText.gameObject.SetActive(false);
         pauseMenuUI.SetActive(false);
         quitButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
         mainMenuButton.gameObject.SetActive(false);
         fogText.gameObject.SetActive(false);
         fogTimerText.gameObject.SetActive(false);
@@ -88,6 +90,7 @@ public class UIManager : MonoBehaviour
     {
         if (pauseMenuUI != null){
             quitButton.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
             mainMenuButton.gameObject.SetActive(true);
             pauseMenuUI.SetActive(true);
         }
@@ -99,6 +102,7 @@ public class UIManager : MonoBehaviour
         if (pauseMenuUI != null){
             quitButton.gameObject.SetActive(false);
             mainMenuButton.gameObject.SetActive(false);
+            restartButton.gameObject.SetActive(false);
             pauseMenuUI.SetActive(false);
         }
         
@@ -114,6 +118,7 @@ public class UIManager : MonoBehaviour
     {
         quitButton.gameObject.SetActive(true);
         mainMenuButton.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
     }
 
 

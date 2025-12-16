@@ -34,6 +34,7 @@ public class SceneController : MonoBehaviour
     {
         isGamePaused = false;
         Time.timeScale = 1f;
+        EventManager.Game.SceneLoaded?.Invoke(name);
         SceneManager.LoadScene(name);
     }
 

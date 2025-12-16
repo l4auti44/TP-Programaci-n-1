@@ -8,17 +8,31 @@ public class HealthManager : MonoBehaviour
 {
 
     public float health = 100f;
+    
     public float Health { get { return health; } }
+
+    private float maxHealth;
     
     private PlayerStateManager _stateManager;
     private UIManager _uiManager;
 
+    private HealthBar healthBar;
+
+    void Awake()
+    {
+        maxHealth = health;
+    }
     void Start()
     {
+        
         if (transform.parent.CompareTag("Player"))
         {
             _stateManager = GetComponent<PlayerStateManager>();
             _uiManager = FindObjectOfType<UIManager>();
+        }
+        if (transform.parent.CompareTag("Enemy"))
+        {
+            healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
         }
     }
     public void TakeDamage(float damage)
@@ -33,6 +47,10 @@ public class HealthManager : MonoBehaviour
         {
             health = 0;
             OnDead();
+        }
+        if (transform.parent.CompareTag("Enemy"))
+        {
+            transform.parent.GetComponentInChildren<HealthBar>().UpdateHealthBar();
         }
     }
 
@@ -74,5 +92,10 @@ public class HealthManager : MonoBehaviour
         if (transform.parent.CompareTag("Player"))
             EventManager.Game.OnPlayerDead -= OnDead;
 
+    }
+
+    public float GetHealthPercentage()
+    {
+        return health / maxHealth;
     }
 }
