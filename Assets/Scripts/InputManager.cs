@@ -34,7 +34,8 @@ public class InputManager : MonoBehaviour
 
                 break;
             case PlayerStateManager.PlayerState.Cruising:
-                cannonsManager.UnselectCannons();
+                if(cannonsManager.cannonGroupEnabled != null)
+                    cannonsManager.UnselectCannons();
                 CruisingControlls();
                 SailControlls();
                 break;

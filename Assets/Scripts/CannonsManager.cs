@@ -6,6 +6,7 @@ public class CannonsManager : MonoBehaviour
 {
     [SerializeField] private CannonGroup[] cannonsGroup;
     [HideInInspector] public CannonGroup cannonGroupEnabled;
+    [HideInInspector] public CannonGroup lastCannonGroupEnabled;
     private PlayerStateManager stateManager;
     
 
@@ -15,10 +16,12 @@ public class CannonsManager : MonoBehaviour
     }
     public void UnselectCannons()
     {
+        lastCannonGroupEnabled = cannonGroupEnabled;
         foreach (var cannonGroup in cannonsGroup)
         {
             cannonGroup.SetCannonsInactive();
             cannonGroup.isCannonsActive = false;
+
         }
         cannonGroupEnabled = null;
     }
@@ -48,6 +51,13 @@ public class CannonsManager : MonoBehaviour
 
     public void SelectCannon()
     {
+        if(lastCannonGroupEnabled != null)
+        {
+            cannonGroupEnabled = lastCannonGroupEnabled;
+            cannonGroupEnabled.SetCannonsActive();
+            cannonGroupEnabled.isCannonsActive = true;
+            return;
+        }
         cannonGroupEnabled = cannonsGroup[0];
         cannonsGroup[0].SetCannonsActive();
         cannonsGroup[0].isCannonsActive = true;
