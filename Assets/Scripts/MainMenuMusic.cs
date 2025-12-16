@@ -10,6 +10,10 @@ public class MainMenuMusic : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        if (FindObjectsOfType<MainMenuMusic>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnSceneLoaded(string name)

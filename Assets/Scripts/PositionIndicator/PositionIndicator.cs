@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
-/// <summary>
-/// �˹������������ Canvas �ڵ���
-/// Todo : ��������Ļ����ݲ�֧��
-/// </summary>
 public class PositionIndicator : MonoBehaviour
 {
     public Transform arrow;
