@@ -6045,6 +6045,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 1023394799}
   offsetCenterPos: 0.5
+  useReferenceCanvasSize: 1
+  referenceCanvasSize: {x: 1920, y: 1080}
   target: {fileID: 1817901092}
 --- !u!1 &969607202
 GameObject:
@@ -7717,6 +7719,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 2122380228}
   offsetCenterPos: 0.5
+  useReferenceCanvasSize: 1
+  referenceCanvasSize: {x: 1920, y: 1080}
   target: {fileID: 842069940}
 --- !u!1 &1132226837
 GameObject:
@@ -10201,6 +10205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 420709778}
   offsetCenterPos: 0.5
+  useReferenceCanvasSize: 1
+  referenceCanvasSize: {x: 1920, y: 1080}
   target: {fileID: 708264261}
 --- !u!1 &1572375748
 GameObject:
@@ -10925,6 +10931,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 583510403}
   offsetCenterPos: 0.5
+  useReferenceCanvasSize: 1
+  referenceCanvasSize: {x: 1920, y: 1080}
   target: {fileID: 483480886}
 --- !u!1 &1728488322
 GameObject:

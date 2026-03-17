@@ -4,6 +4,9 @@ public class PositionIndicator : MonoBehaviour
 {
     public Transform arrow;
     public float offsetCenterPos = 0.5f;
+    public bool useReferenceCanvasSize = true;
+    public Vector2 referenceCanvasSize = new Vector2(960f, 560f);
+    private Vector2 activeCanvasSize;
     private Transform indicatorRoot;
     public Transform target;
     private Camera m_Camera;
@@ -26,8 +29,9 @@ public class PositionIndicator : MonoBehaviour
     void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        m_Camera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? Camera.main : canvas.worldCamera;
-        z_Axis = canvas.worldCamera?.ScreenToWorldPoint(arrow.position).z ?? 0;
+        m_Camera = canvas != null && canvas.renderMode == RenderMode.ScreenSpaceOverlay ? Camera.main : canvas?.worldCamera;
+        activeCanvasSize = useReferenceCanvasSize ? referenceCanvasSize : (canvas != null ? canvas.pixelRect.size : referenceCanvasSize);
+        z_Axis = canvas?.worldCamera?.ScreenToWorldPoint(arrow.position).z ?? 0;
         indicatorRoot = arrow.parent;
         arrow.gameObject.SetActive(false);
     }
@@ -65,10 +69,10 @@ public class PositionIndicator : MonoBehaviour
         pos = center + direction.normalized * radius;
         arrow.position = new Vector3
         {
-            x = pos.x * canvas.pixelRect.width * canvas.transform.localScale.x,
-            y = pos.y * canvas.pixelRect.height * canvas.transform.localScale.x,
-            z =z_Axis
-    };
+            x = pos.x * activeCanvasSize.x * canvas.transform.localScale.x,
+            y = pos.y * activeCanvasSize.y * canvas.transform.localScale.x,
+            z = z_Axis
+        };
     }
 
     void Update()
