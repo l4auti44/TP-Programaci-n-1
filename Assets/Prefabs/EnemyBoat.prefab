@@ -149,6 +149,7 @@ MonoBehaviour:
   - {fileID: 6272689539398258519}
   - {fileID: 7907270406934281179}
   cannonGroupEnabled: {fileID: 0}
+  lastCannonGroupEnabled: {fileID: 0}
 --- !u!114 &7131917526563671907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +496,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0546c9ae76f67fb438b72e37d0c766ba, type: 3}
   m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FlipX: 0
