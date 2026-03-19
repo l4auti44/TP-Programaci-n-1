@@ -1,0 +1,14 @@
+Cambios
+
+-Se agregaron diferentes tipos de balas de cañón (magnética y una que se divide).
+Además, se añadió la posibilidad de comprarlas y asignarlas individualmente a cada cañón.
+
+-Se incorporaron distintos feedbacks, como: flash al impactar a un enemigo, barra de vida del enemigo, distintos efectos de sonido, screen shake al disparar y recibir daño, e indicador de enemigos para encontrarlos más fácilmente.
+
+-Se añadió una nueva mecánica que impide salir del mapa, implementando un contador al entrar en la niebla; si este llega a cero, se pierde el juego.
+
+-Implementación del arte realizado en TDI2. El 90 % del arte fue creado por mí.
+
+-Se añadió música al menú y se mejoró el mismo incorporando instrucciones y créditos.
+
+-Arreglos varios de bugs.
